@@ -9,8 +9,10 @@ import threading
 # setup arguments and help messages
 example_text = '''
 * Example Usages:
-  
+
   python3 ./%(prog)s.py -p 8000
+
+  python3 ./%(prog)s.py -p 8000 -v
 
   python3 ./%(prog)s.py -H 192.168.1.1 -p 8000
 
@@ -28,15 +30,14 @@ parser.add_argument("-p", dest="port", action="store", default=8000, type=int,
                     help="Specify the port for this server to listen. (default = 8000)")
 parser.add_argument("-v", dest="verbose_flag", action="store_true",
                     help="Set verbose level to 1. (info)")
-# parser.add_argument("-vv", dest="more_verbose_flag", action="store_true",
-#                     help="Set verbose level to 2. (debug)")
+
 
 args = parser.parse_args()
 
 
 logging.basicConfig(level=logging.INFO)
 if args.verbose_flag:
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.DEBUG)
 
 
 use_https = False
@@ -94,5 +95,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
-
